@@ -43,7 +43,7 @@ public class AudioService
         }
         if (ConnectedChannels.TryGetValue(guild.Id, out var client))
         {
-            await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}").ConfigureAwait(false);
+            //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}").ConfigureAwait(false);
             var output = CreateStream(v).StandardOutput.BaseStream;
             var stream = client.CreatePCMStream(1920);
             await output.CopyToAsync(stream, 81920, _cancel.Token).ConfigureAwait(false);
