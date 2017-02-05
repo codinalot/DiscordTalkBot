@@ -1,6 +1,4 @@
 using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Discord.Audio;
 
 public class AudioService
@@ -30,25 +28,24 @@ public class AudioService
     {
         if (ConnectedChannels.TryRemove(guild.Id, out var client))
         {
-            await client.DisconnectAsync().ConfigureAwait(false);
+            await client.DisconnectAsync();
             //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.").ConfigureAwait(false);
         }
     }
     
     public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
     {
-        string v = Path.Combine(_config.MusicBasePath, path);
-        if (!File.Exists(v))
+        if (!File.Exists(path))
         {
-            await channel.SendMessageAsync("File does not exist.").ConfigureAwait(false);
+            await channel.SendMessageAsync("File does not exist.");
             return;
         }
         if (ConnectedChannels.TryGetValue(guild.Id, out var client))
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}").ConfigureAwait(false);
-            var output = CreateStream(v).StandardOutput.BaseStream;
+            var output = CreateStream(path).StandardOutput.BaseStream;
             var stream = client.CreatePCMStream(1920);
-            await output.CopyToAsync(stream, 81920, _cancel.Token).ConfigureAwait(false);
+            await output.CopyToAsync(stream);
             await stream.FlushAsync().ConfigureAwait(false);
         }
     }
@@ -57,11 +54,10 @@ public class AudioService
     {
         return Process.Start(new ProcessStartInfo
         {
-            FileName = Path.Combine(_config.FFMpegPath, "ffmpeg.exe"),
+            FileName = "ffmpeg.exe",
             Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
             UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = false
+            RedirectStandardOutput = true
         });
     }
 }
