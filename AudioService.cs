@@ -5,10 +5,6 @@ public class AudioService
 {
     public ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels { get; } = new ConcurrentDictionary<ulong, IAudioClient>();
 
-    public AudioService()
-    {
-    }
-
     public async Task JoinAudio(IGuild guild, IVoiceChannel target)
     {
         if (ConnectedChannels.TryGetValue(guild.Id, out var _))
