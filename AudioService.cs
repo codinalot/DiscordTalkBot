@@ -7,7 +7,8 @@ public class AudioService
 
     public async Task JoinAudio(IGuild guild, IVoiceChannel target)
     {
-        if (ConnectedChannels.TryGetValue(guild.Id, out var _))
+        IAudioClient client;
+        if (ConnectedChannels.TryGetValue(guild.Id, out client))
         {
             return;
         }
@@ -16,7 +17,7 @@ public class AudioService
             return;
         }
 
-        var audioClient = await target.ConnectAsync().ConfigureAwait(false);
+        var audioClient = await target.ConnectAsync();
 
         if (ConnectedChannels.TryAdd(guild.Id, audioClient))
         {
@@ -26,7 +27,8 @@ public class AudioService
 
     public async Task LeaveAudio(IGuild guild)
     {
-        if (ConnectedChannels.TryRemove(guild.Id, out var client))
+        IAudioClient client;
+        if (ConnectedChannels.TryRemove(guild.Id, out client))
         {
             await client.DisconnectAsync();
             //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.").ConfigureAwait(false);
@@ -40,7 +42,8 @@ public class AudioService
             await channel.SendMessageAsync("File does not exist.");
             return;
         }
-        if (ConnectedChannels.TryGetValue(guild.Id, out var client))
+        IAudioClient client;
+        if (ConnectedChannels.TryGetValue(guild.Id, out client))
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}").ConfigureAwait(false);
             var output = CreateStream(path).StandardOutput.BaseStream;
