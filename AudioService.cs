@@ -1,9 +1,11 @@
+using System.Collections.Concurrent;
+using Discord.Audio;
+
 public class AudioService
 {
-
     public ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels { get; } = new ConcurrentDictionary<ulong, IAudioClient>();
 
-    internal AudioService()
+    public AudioService()
     {
     }
 
@@ -22,7 +24,7 @@ public class AudioService
 
         if (ConnectedChannels.TryAdd(guild.Id, audioClient))
         {
-            await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.").ConfigureAwait(false);
+            //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.").ConfigureAwait(false);
         }
     }
 
@@ -31,7 +33,7 @@ public class AudioService
         if (ConnectedChannels.TryRemove(guild.Id, out var client))
         {
             await client.DisconnectAsync().ConfigureAwait(false);
-            await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.").ConfigureAwait(false);
+            //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.").ConfigureAwait(false);
         }
     }
 }

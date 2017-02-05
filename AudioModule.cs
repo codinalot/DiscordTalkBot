@@ -1,3 +1,5 @@
+using Discord.Commands;
+
 public class AudioModule : ModuleBase<ICommandContext>
 {
     private readonly AudioService _service;
@@ -7,7 +9,7 @@ public class AudioModule : ModuleBase<ICommandContext>
         _service = service;
     }
 
-    [Command("connect", RunMode = RunMode.Async)
+    [Command("join", RunMode = RunMode.Async)
     public Task ConnectCmd()
     {
         return _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
