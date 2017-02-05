@@ -20,4 +20,10 @@ public class AudioModule : ModuleBase<ICommandContext>
     {
         return _service.LeaveAudio(Context.Guild);
     }
+    
+    [Command("play", RunMode = RunMode.Async)]
+    public Task PlayCmd([Remainder] string song)
+    {
+        return _service.SendAudioAsync(Context.Guild, Context.Channel, song);
+    }
 }
