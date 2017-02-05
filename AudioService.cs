@@ -3,7 +3,7 @@ using Discord.Audio;
 
 public class AudioService
 {
-    public ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels { get; } = new ConcurrentDictionary<ulong, IAudioClient>();
+    private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
     public async Task JoinAudio(IGuild guild, IVoiceChannel target)
     {

@@ -9,8 +9,8 @@ public class AudioModule : ModuleBase<ICommandContext>
         _service = service;
     }
 
-    // Remember to add preconditions to your commands.
-    // This is merely the minimal amount necessary.
+    // Remember to add preconditions to your commands,
+    // this is merely the minimal amount necessary.
     [Command("join", RunMode = RunMode.Async)]
     public Task JoinCmd()
     {
