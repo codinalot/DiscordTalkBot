@@ -10,7 +10,7 @@ public class AudioModule : ModuleBase<ICommandContext>
     }
 
     [Command("join", RunMode = RunMode.Async)
-    public Task ConnectCmd()
+    public Task JoinCmd()
     {
         return _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
     }
