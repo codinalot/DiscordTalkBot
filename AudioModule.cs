@@ -12,20 +12,20 @@ public class AudioModule : ModuleBase<ICommandContext>
     // Remember to add preconditions to your commands,
     // this is merely the minimal amount necessary.
     [Command("join", RunMode = RunMode.Async)]
-    public Task JoinCmd()
+    public async Task JoinCmd()
     {
-        return _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
+        await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
     }
 
     [Command("leave", RunMode = RunMode.Async)]
-    public Task LeaveCmd()
+    public async Task LeaveCmd()
     {
-        return _service.LeaveAudio(Context.Guild);
+        await _service.LeaveAudio(Context.Guild);
     }
     
     [Command("play", RunMode = RunMode.Async)]
-    public Task PlayCmd([Remainder] string song)
+    public async Task PlayCmd([Remainder] string song)
     {
-        return _service.SendAudioAsync(Context.Guild, Context.Channel, song);
+        await _service.SendAudioAsync(Context.Guild, Context.Channel, song);
     }
 }
