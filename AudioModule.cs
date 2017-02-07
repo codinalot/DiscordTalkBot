@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Discord.Commands;
 
 public class AudioModule : ModuleBase<ICommandContext>

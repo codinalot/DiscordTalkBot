@@ -1,4 +1,7 @@
 using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Audio;
 
 public class AudioService
