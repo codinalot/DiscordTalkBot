@@ -3,6 +3,7 @@ using Discord.Commands;
 
 public class AudioModule : ModuleBase<ICommandContext>
 {
+    // Scroll down further for the AudioService.
     private readonly AudioService _service;
 
     public AudioModule(AudioService service)
