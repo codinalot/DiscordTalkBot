@@ -24,7 +24,7 @@ public class AudioService
 
         if (ConnectedChannels.TryAdd(guild.Id, audioClient))
         {
-            //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.").ConfigureAwait(false);
+            //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.");
         }
     }
 
@@ -33,13 +33,14 @@ public class AudioService
         IAudioClient client;
         if (ConnectedChannels.TryRemove(guild.Id, out client))
         {
-            await client.DisconnectAsync();
-            //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.").ConfigureAwait(false);
+            await client.StopAsync();
+            //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.");
         }
     }
     
     public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
     {
+        // Your task: Get a full path to the file if the value of 'path' is only a filename.
         if (!File.Exists(path))
         {
             await channel.SendMessageAsync("File does not exist.");
@@ -48,9 +49,9 @@ public class AudioService
         IAudioClient client;
         if (ConnectedChannels.TryGetValue(guild.Id, out client))
         {
-            //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}").ConfigureAwait(false);
+            //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
             var output = CreateStream(path).StandardOutput.BaseStream;
-            var stream = client.CreatePCMStream(1920);
+            var stream = client.CreatePCMStream(AudioApplication.Music, 1920);
             await output.CopyToAsync(stream);
             await stream.FlushAsync().ConfigureAwait(false);
         }

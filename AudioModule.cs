@@ -4,6 +4,8 @@ using Discord.Commands;
 public class AudioModule : ModuleBase<ICommandContext>
 {
     // Scroll down further for the AudioService.
+    // Like, way down.
+    // Hit 'End' on your keyboard if you still can't find it.
     private readonly AudioService _service;
 
     public AudioModule(AudioService service)
@@ -21,6 +23,7 @@ public class AudioModule : ModuleBase<ICommandContext>
 
     // Remember to add preconditions to your commands,
     // this is merely the minimal amount necessary.
+    // Adding more commands of your own is also encouraged.
     [Command("leave", RunMode = RunMode.Async)]
     public async Task LeaveCmd()
     {
