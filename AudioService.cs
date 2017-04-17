@@ -51,7 +51,7 @@ public class AudioService
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
             var output = CreateStream(path).StandardOutput.BaseStream;
-            var stream = client.CreatePCMStream(AudioApplication.Music, 1920);
+            var stream = client.CreatePCMStream(AudioApplication.Music);
             await output.CopyToAsync(stream);
             await stream.FlushAsync().ConfigureAwait(false);
         }
