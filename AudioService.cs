@@ -52,6 +52,9 @@ public class AudioService
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
             var output = CreateStream(path).StandardOutput.BaseStream;
+            
+            // You can change the bitrate of the outgoing stream with an additional argument to CreatePCMStream().
+            // If not specified, the default bitrate is 96*1024.
             var stream = client.CreatePCMStream(AudioApplication.Music);
             await output.CopyToAsync(stream);
             await stream.FlushAsync().ConfigureAwait(false);
