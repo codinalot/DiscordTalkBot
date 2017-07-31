@@ -4,10 +4,11 @@ using Discord.Commands;
 public class AudioModule : ModuleBase<ICommandContext>
 {
     // Scroll down further for the AudioService.
-    // Like, way down.
-    // Hit 'End' on your keyboard if you still can't find it.
+    // Like, way down
     private readonly AudioService _service;
 
+    // Remember to add an instance of the AudioService
+    // to your IServiceCollection when you initialize your bot
     public AudioModule(AudioService service)
     {
         _service = service;

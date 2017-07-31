@@ -25,6 +25,8 @@ public class AudioService
 
         if (ConnectedChannels.TryAdd(guild.Id, audioClient))
         {
+            // If you add a method to log happenings from this service,
+            // you can uncomment the following line to make use of that.
             //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.");
         }
     }
