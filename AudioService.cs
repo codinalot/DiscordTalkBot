@@ -57,7 +57,7 @@ public class AudioService
             using (var stream = client.CreatePCMStream(AudioApplication.Music))
             {
                 try { await output.CopyToAsync(stream); }
-                finally { await stream.FlushAsync().ConfigureAwait(false); }
+                finally { await stream.FlushAsync(); }
             }
         }
     }
