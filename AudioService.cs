@@ -26,7 +26,7 @@ public class AudioService
         if (ConnectedChannels.TryAdd(guild.Id, audioClient))
         {
             // If you add a method to log happenings from this service,
-            // you can uncomment the following line to make use of that.
+            // you can uncomment these commented lines to make use of that.
             //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.");
         }
     }
@@ -53,13 +53,12 @@ public class AudioService
         if (ConnectedChannels.TryGetValue(guild.Id, out client))
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
-            var output = CreateStream(path).StandardOutput.BaseStream;
-            
-            // You can change the bitrate of the outgoing stream with an additional argument to CreatePCMStream().
-            // If not specified, the default bitrate is 96*1024.
-            var stream = client.CreatePCMStream(AudioApplication.Music);
-            await output.CopyToAsync(stream);
-            await stream.FlushAsync().ConfigureAwait(false);
+            using (var output = CreateStream(path).StandardOutput.BaseStream)
+            using (var stream = client.CreatePCMStream(AudioApplication.Music))
+            {
+                await output.CopyToAsync(stream);
+                await stream.FlushAsync().ConfigureAwait(false);
+            }
         }
     }
 
