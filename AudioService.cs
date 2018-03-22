@@ -53,10 +53,10 @@ public class AudioService
         if (ConnectedChannels.TryGetValue(guild.Id, out client))
         {
             //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
-            using (var output = CreateStream(path).StandardOutput.BaseStream)
+            using (var ffmpeg = CreateProcess(path))
             using (var stream = client.CreatePCMStream(AudioApplication.Music))
             {
-                try { await output.CopyToAsync(stream); }
+                try { await ffmpeg.StandardOutput.BaseStream.CopyToAsync(stream); }
                 finally { await stream.FlushAsync(); }
             }
         }
