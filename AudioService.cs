@@ -62,7 +62,7 @@ public class AudioService
         }
     }
 
-    private Process CreateStream(string path)
+    private Process CreateProcess(string path)
     {
         return Process.Start(new ProcessStartInfo
         {
