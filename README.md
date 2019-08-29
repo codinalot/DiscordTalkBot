@@ -17,6 +17,8 @@ In order to use, you'll have to do a few things (but only a few).
 
 (4) Place your discord bot token in DiscordToken.txt.
 
+(5) Download nuget.exe and run it on the packages.config to generate packages
+
 Have fun!
 
 -This is based on some boilerplate discord audio code from @Joe4evr
