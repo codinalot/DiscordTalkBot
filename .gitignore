@@ -4,6 +4,6 @@ DiscordBot/obj
 DiscordBot/debug
 DiscordBot/release
 DiscordBot/*.dll
-DiscordBot/App.config
 DiscordBot/Properties/AssemblyInfo.cs
 DiscordBot/DiscordToken.txt
+packages
