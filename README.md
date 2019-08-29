@@ -1,7 +1,9 @@
 # DiscordTalkBot
 
-This project is a discord bot that uses Jampal speech to text (http://jampal.sourceforge.net/ptts.html) to speak in your audio channel! 
+This project is a discord bot that uses Jampal speech to text (http://jampal.sourceforge.net/ptts.html) to speak in your audio channel!
+
 It will also play music (or any mp3 / wav file) that you've placed in C:\music. 
+
 On top of this, it can also automatically retrieve posts from reddit (for the memes).
 
 In order to use, you'll have to do a few things (but only a few).
@@ -16,3 +18,5 @@ In order to use, you'll have to do a few things (but only a few).
 (4) Place your discord bot token in DiscordToken.txt.
 
 Have fun!
+
+-This is based on some boilerplate discord audio code from @Joe4evr
